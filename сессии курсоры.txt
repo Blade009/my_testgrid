@@ -1,0 +1,10 @@
+select a.value, s.username, s.sid, s.serial#
+from v$sesstat a, v$statname b, v$session s
+where a.statistic# = b.statistic#  and s.sid=a.sid
+and b.name = 'opened cursors current';
+
+
+select c.user_name, c.sid, sql.sql_text
+from v$open_cursor c, v$sql sql
+where c.sql_id=sql.sql_id  -- for 9i and earlier use: c.address=sql.address
+and c.sid=1629
